@@ -1,12 +1,16 @@
 <template>
-  <div class="container mx-auto">
-    <h1 class="text-slate-700">Home</h1>
+  <div class="container mx-auto py-2 h-full bg-slate-200">
+    <BadgeList />
   </div>
 </template>
 
 <script>
+import BadgeList from "@/components/BadgeList.vue";
+
 export default {
-  name: "HomeView"
+  name: "HomeView",
+  components: {BadgeList}
+
 }
 </script>
 
