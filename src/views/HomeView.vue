@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto py-2 h-full bg-slate-200">
-    <ListContainer :items="listData"/>
+    <ListContainer :items="listData" class="w-1/4"/>
   </div>
 </template>
 
