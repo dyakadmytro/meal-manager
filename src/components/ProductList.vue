@@ -2,14 +2,13 @@
   <div>
   <div style="margin-bottom: 2em">
     <el-page-header @back="onBack">
-      <template #breadcrumb>
+      <template v-if="useBreadcrumb" #breadcrumb>
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: './page-header.html' }">
             homepage
           </el-breadcrumb-item>
           <el-breadcrumb-item
-          ><a href="./page-header.html">route 1</a></el-breadcrumb-item
-          >
+          ><a href="./page-header.html">route 1</a></el-breadcrumb-item>
           <el-breadcrumb-item>route 2</el-breadcrumb-item>
         </el-breadcrumb>
       </template>
@@ -18,13 +17,11 @@
           <el-avatar
               class="mr-3"
               :size="32"
-              src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-          />
+              src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"/>
           <span class="text-large font-600 mr-3"> Products </span>
           <span
               class="text-sm mr-2"
-              style="color: var(--el-text-color-regular)"
-          >
+              style="color: var(--el-text-color-regular)">
             actions list
           </span>
           <el-tag>Full</el-tag>
@@ -123,12 +120,13 @@ export default {
   name: 'ProductList',
   components: {CreateProductForm},
   props: {
-    items: Array
+    items: Array,
+    useBreadcrumb: false
   },
-  setup() {
+  setup(props) {
     const widget = reactive({
       modal: {
-        active: false
+        active: false,
       }
     })
 
