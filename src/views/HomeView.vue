@@ -1,17 +1,22 @@
 <template>
-  <div class="container mx-auto py-2 h-full bg-slate-200">
-    <ListContainer :items="listData" class="w-1/4"/>
+  <div class="common-layout">
+    <el-container>
+      <el-header>Header</el-header>
+      <el-main>
+        <ProductList :items="listData" />
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script>
 import { markRaw } from 'vue';
-import ListContainer from "@/components/ListContainer.vue";
+import ProductList from "@/components/ProductList.vue";
 import BadgedListItem from "@/components/ui/BadgedListItem.vue";
 
 export default {
   name: "HomeView",
-  components: {ListContainer},
+  components: {ProductList},
   data() {
     return {
       listData: [
