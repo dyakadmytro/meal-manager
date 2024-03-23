@@ -98,7 +98,7 @@
       </el-collapse-item>
     </el-collapse>
   </el-scrollbar>
-  <el-dialog v-model="modal.active" title="Shipping address" width="500">
+  <el-dialog v-model="modal.active" title="Create product" width="700">
     <CreateProductForm @complete="closeModal"/>
 <!--    <template #footer>-->
 <!--      <div class="dialog-footer">-->
