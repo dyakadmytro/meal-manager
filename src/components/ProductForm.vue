@@ -1,10 +1,7 @@
 <template>
   <el-form :model="form">
     <el-form-item label="Name" >
-      <el-input v-model="formData.name"  />
-    </el-form-item>
-    <el-form-item label="Description" >
-      <el-input v-model="formData.description" autocomplete="off" type="textarea"/>
+      <el-input v-model="formData.name" />
     </el-form-item>
     <el-form-item :label="form.tags.label">
       <el-select
@@ -25,6 +22,9 @@
       </el-select>
     </el-form-item>
     <div class="form-inputs-grid">
+      <el-form-item :label="form.calories.label" label-width="100">
+        <el-input-number class="form-input-number" v-model="formData.calories" :min="1" :max="1000" :controls="false"/>
+      </el-form-item>
       <el-form-item label="Avg size" >
         <el-input-number v-model="formData.averageSize" :min="1" :max="1000" autocomplete="off" />
       </el-form-item>
@@ -45,9 +45,6 @@
       </el-form-item>
     </div>
     <div class="form-inputs-grid">
-      <el-form-item :label="form.calories.label" label-width="100">
-        <el-input-number class="form-input-number" v-model="formData.calories" :min="1" :max="1000" :controls="false"/>
-      </el-form-item>
       <el-form-item :label="form.protein.label" label-width="100">
         <el-input-number class="form-input-number" v-model="formData.protein" :min="0" :max="1000" :controls="false" />
       </el-form-item>
@@ -67,6 +64,9 @@
         <el-input-number class="form-input-number" v-model="formData.calcium" :min="0" :max="1000" :controls="false" />
       </el-form-item>
     </div>
+    <el-form-item label="Description" >
+      <el-input v-model="formData.description" autocomplete="off" type="textarea"/>
+    </el-form-item>
     <div class="form-footer">
       <el-form-item>
         <el-button type="primary" @click="handleSubmit">Create</el-button>
@@ -75,10 +75,18 @@
   </el-form>
 </template>
 
-<script>
-import {reactive, toRef} from 'vue';
+<script lang="ts">
+import {reactive, toRef, PropType} from 'vue';
+import {Product} from '@/types'
 
 export default {
+  name: 'ProductForm',
+  props: {
+    product: {
+      type: Object as PropType<Product>,
+      required: false
+    }
+  },
   setup(props, ctx) {
     const formData = reactive({
       name: '',
@@ -94,6 +102,10 @@ export default {
       cholesterol: 0,
       calcium: 0,
     });
+
+    if (props.product) {
+      Object.keys(props.product).forEach((item) => formData[item] = props.product?.[item])
+    }
 
     const form = {
       tags: {

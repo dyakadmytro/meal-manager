@@ -53,14 +53,30 @@
   <el-scrollbar height="400px">
     <el-collapse v-model="activeNames" @change="handleChange">
       <el-collapse-item title="Consistency" name="1">
-        <div>
-          Consistent with real life: in line with the process and logic of real
-          life, and comply with languages and habits that the users are used to;
-        </div>
-        <div>
-          Consistent within interface: all elements should be consistent, such
-          as: design style, icons and texts, position of elements, etc.
-        </div>
+        <el-descriptions title="Customized style list" :column="3" border>
+          <el-descriptions-item
+              label="Username"
+              label-align="right"
+              align="center"
+              label-class-name="my-label"
+              class-name="my-content"
+              width="150px"
+          >kooriookami</el-descriptions-item
+          >
+          <el-descriptions-item label="Telephone" label-align="right" align="center"
+          >18100000000</el-descriptions-item
+          >
+          <el-descriptions-item label="Place" label-align="right" align="center"
+          >Suzhou</el-descriptions-item
+          >
+          <el-descriptions-item label="Remarks" label-align="right" align="center">
+            <el-tag size="small">School</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="Address" label-align="right" align="center"
+          >No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu
+            Province</el-descriptions-item
+          >
+        </el-descriptions>
       </el-collapse-item>
       <el-collapse-item title="Feedback" name="2">
         <div>
@@ -86,20 +102,24 @@
         </div>
       </el-collapse-item>
       <el-collapse-item title="Controllability" name="4">
-        <div>
-          Decision making: giving advices about operations is acceptable, but do
-          not make decisions for the users;
-        </div>
-        <div>
-          Controlled consequences: users should be granted the freedom to
-          operate, including canceling, aborting or terminating current
-          operation.
-        </div>
+        <el-card :body-style="{ padding: '0px' }">
+          <img
+              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+              class="image"
+          />
+          <div style="padding: 14px">
+            <span>Yummy hamburger</span>
+            <div class="bottom">
+              <time class="time">jhgjhgjhhg</time>
+              <el-button text class="button">Operating</el-button>
+            </div>
+          </div>
+        </el-card>
       </el-collapse-item>
     </el-collapse>
   </el-scrollbar>
   <el-dialog v-model="modal.active" title="Create product" width="700">
-    <CreateProductForm @complete="closeModal"/>
+    <ProductForm @complete="closeModal"/>
 <!--    <template #footer>-->
 <!--      <div class="dialog-footer">-->
 <!--        <el-button @click="dialogFormVisible = false">Cancel</el-button>-->
@@ -112,13 +132,13 @@
   </div>
 </template>
 
-<script>
-import CreateProductForm from "@/components/CreateProductForm.vue";
+<script lang="ts">
+import ProductForm from "@/components/ProductForm.vue";
 import {reactive} from "vue";
 
 export default {
   name: 'ProductList',
-  components: {CreateProductForm},
+  components: {ProductForm},
   props: {
     items: Array,
     useBreadcrumb: false
@@ -127,7 +147,7 @@ export default {
     const widget = reactive({
       modal: {
         active: false,
-      }
+      },
     })
 
     function openModal() {
