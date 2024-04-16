@@ -1,0 +1,7 @@
+{
+  "name": "MealManager",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
